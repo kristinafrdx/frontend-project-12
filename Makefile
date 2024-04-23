@@ -1,15 +1,14 @@
 install:
 	npm ci
 
+lint:
+	make -C frontend lint
+
 start-frontend:
 	make -C frontend start
 
 start-backend:
-	npx start-server -s ./frontend/build
+	npm start
 
 start:
-	make start-backend && make start-frontend
-
-build:
-	rm -rf frontend/build
-	npm run build
+	make start-backend & make start-frontend
