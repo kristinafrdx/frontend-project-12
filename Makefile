@@ -17,5 +17,5 @@ develop:
 	make start-backend & make start-frontend
 
 build:
-	rm chat/build -rf
+	rm frontend/build -rf
 	npm run build
