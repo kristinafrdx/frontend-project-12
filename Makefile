@@ -1,14 +1,21 @@
+lint-frontend:
+	make -C chat lint
+
 install:
 	npm ci
 
-lint:
-	make -C frontend lint
-
 start-frontend:
-	make -C frontend start
+	make -C chat start
 
 start-backend:
 	npx start-server
 
 start:
+	make start-backend
+
+develop:
 	make start-backend & make start-frontend
+
+build:
+	rm chat/build -rf
+	npm run build
