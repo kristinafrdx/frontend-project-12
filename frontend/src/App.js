@@ -1,23 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
+import { Route, Routes, BrowserRouter as Router, Navigate, useNavigate } from "react-router-dom";
+import NotFoundPage from './components/NotFound';
+import Login from './components/Login';
+import Chat from './components/Chat';
+import { useSelector } from 'react-redux';
 
 function App() {
+  const token = useSelector(state => state.user.token);
+  const isAuthorized = token ? true : false;
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App vh-100 bg-light">
+       <Router>
+          <Routes>
+            <Route path="/" element={ isAuthorized ? <Chat /> : <Login />}/>
+            <Route path="/login" element={<Login />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </Router>
     </div>
   );
 }
