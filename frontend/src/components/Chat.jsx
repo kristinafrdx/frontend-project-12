@@ -6,13 +6,12 @@ import Header from "./Header";
 import Field from "./Field";
 import Channels from "./Channels";
 import { setMessages } from '../slices/messagesSlice';
+import CreateChannel from "./CreateChannel";
 
 const Chat = () => {
-  const token = useSelector((state) => state.user.token);
-  const userName = useSelector((state) => state.user.userName);
+  const token = localStorage.getItem('token');
 
   const dispatch = useDispatch();
-
   const getChannels = async (token) => {
     await axios.get("/api/v1/channels", {
       headers: {
@@ -47,7 +46,8 @@ const Chat = () => {
   }, [token]);
 
   return (
-    <div className="h-100" id="chat">
+    <>
+     <div className="h-100" id="chat">
       <div className="d-flex flex-column h-100">
         <Header />
         <div className="container h-100 my-4 overflow-hidden rounded shadow">
@@ -59,6 +59,8 @@ const Chat = () => {
       </div>
       <div className="Toastify"></div>
     </div>
+    {/* { showModal && <CreateChannel /> } */}
+    </>
   );
 };
 

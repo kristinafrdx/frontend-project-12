@@ -7,9 +7,9 @@ import { useSelector } from 'react-redux';
 import Registration from './components/Registration';
 
 function App() {
-  const token = useSelector(state => state.user.token);
+  // const token = useSelector(state => state.user.token);
+  const token = localStorage.getItem('token')
   const isAuthorized = token ? true : false;
-
   return (
     <div className="App vh-100 bg-light">
        <Router>

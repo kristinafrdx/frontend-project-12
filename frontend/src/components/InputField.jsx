@@ -6,9 +6,8 @@ import { setMessages } from "../slices/messagesSlice";
 const InputField = ({ channelId }) => {
   const [message, setMessage] = useState("");
   const [disabled, setDisabled] = useState(true)
-  const userName = useSelector((state) => state.user.userName);
-  const token = useSelector((state) => state.user.token);
-  const dispatch = useDispatch();
+  const userName = localStorage.getItem('username');
+  const token = localStorage.getItem('token');
 
   const handleMessage = (e) => {
     if( e.target.value.length > 0) {
