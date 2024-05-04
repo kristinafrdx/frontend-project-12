@@ -1,6 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { setMessages } from "../slices/messagesSlice";
 
-const InputField = () => {
+const InputField = ({ channelId }) => {
+  const [message, setMessage] = useState("");
+  const [disabled, setDisabled] = useState(true)
+  const userName = useSelector((state) => state.user.userName);
+  const token = useSelector((state) => state.user.token);
+  const dispatch = useDispatch();
+
+  const handleMessage = (e) => {
+    if( e.target.value.length > 0) {
+      setMessage(e.target.value);
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+      setMessage('')
+    }
+  }
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const newMessage = { body: message, channelId: channelId, username: userName };
+    await axios.post('/api/v1/messages', newMessage, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((response) => {
+      // console.log(response.data); // => { id: '1', body: 'new message', channelId: '1', username: 'admin }
+      setMessage('')
+    })
+    .catch((e) => {
+      console.log(e)
+    })
+  }
+  
+
   return (
     <div className="mt-auto px-5 py-3">
       <form noValidate="" className="py-1 border rounded-2">
@@ -10,9 +46,15 @@ const InputField = () => {
             aria-label="Новое сообщение"
             placeholder="Введите сообщение..."
             className="border-0 p-0 ps-2 form-control"
-            value=""
+            value={message}
+            onChange={(e) => handleMessage(e)}
           />
-          <button type="submit" disabled="" className="btn btn-group-vertical">
+          <button 
+            type="submit"
+            disabled={disabled} 
+            className="btn btn-group-vertical"
+            onClick={(e) => handleSubmit(e)}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"

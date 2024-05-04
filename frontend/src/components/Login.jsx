@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react';
@@ -22,9 +22,7 @@ const Login = () => {
     },
     onSubmit: async (values) => {
       try {
-        const { data } = await axios.post('/api/v1/login', 
-        { username: 'admin', password: 'admin' });
-        // { values });
+        const { data } = await axios.post('/api/v1/login', values);
         if (data.token) {
           localStorage.setItem('user', data);
           addToken(data.token);
@@ -84,7 +82,7 @@ const Login = () => {
                         />
                         <label htmlFor="password">Пароль</label>
                         { err && (
-                          <div class="invalid-tooltip">
+                          <div className="invalid-tooltip">
                             Неверные имя пользователя или пароль
                           </div>
                         )}
