@@ -17,8 +17,8 @@ function App() {
   const isAuthorized = token ? true : false;
 
   return (
-    <div className="App vh-100 bg-light">
-      <Router>
+    <div className="d-flex flex-column h-100">
+    <Router>
         <Routes>
           <Route path="/" element={isAuthorized ? <Chat /> : <Navigate to='/login' /> } />
           <Route path="/login" element={<Login />} />

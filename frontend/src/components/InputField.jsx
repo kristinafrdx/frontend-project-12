@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { setMessages } from "../slices/messagesSlice";
 
 const InputField = ({ channelId }) => {
   const [message, setMessage] = useState("");
@@ -31,8 +29,7 @@ const InputField = ({ channelId }) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => {
-        // console.log(response.data); // => { id: '1', body: 'new message', channelId: '1', username: 'admin }
+      .then(() => {
         setMessage("");
       })
       .catch((e) => {

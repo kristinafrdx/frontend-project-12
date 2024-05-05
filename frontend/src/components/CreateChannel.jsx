@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 import axios from "axios";
 import { setCurrentChannel } from "../slices/currentChannelSlice";
 import { useDispatch, useSelector } from "react-redux";

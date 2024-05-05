@@ -1,8 +1,11 @@
 import React from "react";
 import { resetToken, resetUserName } from "../slices/authSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
 const Header = () => {
+  const token = useSelector(state => state.user.token);
+  const isAuthorized = token ? true : false;
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -20,13 +23,15 @@ const Header = () => {
         <a className="navbar-brand" href="/">
           Hexlet Chat
         </a>
-        <button
+        { isAuthorized && (
+          <button
           type="button"
           className="btn btn-primary"
           onClick={handleLogout}
         >
           Выйти
         </button>
+        )}
       </div>
     </nav>
   );
