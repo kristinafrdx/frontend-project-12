@@ -1,10 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const authSlice = createSlice({
-  name: 'user',
+  name: "user",
   initialState: {
     token: null,
-    userName: '',
+    userName: "",
   },
   reducers: {
     setToken(state, action) {
@@ -20,11 +20,12 @@ const authSlice = createSlice({
     },
 
     resetUserName(state, action) {
-      state.userName = '';
-    }
-  }
-})
+      state.userName = "";
+    },
+  },
+});
 
-export const { setToken, resetToken, setUserName, resetUserName } = authSlice.actions;
+export const { setToken, resetToken, setUserName, resetUserName } =
+  authSlice.actions;
 
 export default authSlice.reducer;

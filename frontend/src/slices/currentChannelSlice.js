@@ -1,16 +1,16 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const currentChannelSlice = createSlice({
-  name: 'currentChannel',
+  name: "currentChannel",
   initialState: {
-    currentChannel: {id: '1', name: 'general', removable: false}
+    currentChannel: { id: "1", name: "general", removable: false },
   },
   reducers: {
     setCurrentChannel(state, action) {
-      state.currentChannel = action.payload
+      state.currentChannel = action.payload;
     },
-  }
-})
+  },
+});
 
 export const { setCurrentChannel } = currentChannelSlice.actions;
 

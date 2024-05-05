@@ -1,16 +1,23 @@
-import React, { useState, useRef } from "react";
-import axios from "axios";
-import { setCurrentChannel } from "../slices/currentChannelSlice";
+import React, { useEffect, useRef } from "react";
+import { Modal, Form } from "react-bootstrap";
+import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
-import { useFormik } from "formik";
-import { Modal, Form } from "react-bootstrap";
+import axios from "axios";
+import { setChannels } from "../slices/channelsSlice";
+import { setCurrentChannel } from "../slices/currentChannelSlice";
 
-const CreateChannel = ({ setShowModal, setActiveChannel }) => {
+const RenameChannel = ({ setShowModal, channel }) => {
   const channels = useSelector((state) => state.channels.channels);
-
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
+
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    inputRef.current && inputRef.current.focus();
+    inputRef.current && inputRef.current.select();
+  }, []);
 
   const channelsNames = () => {
     return channels.map((el) => el.name);
@@ -34,22 +41,24 @@ const CreateChannel = ({ setShowModal, setActiveChannel }) => {
 
   const formik = useFormik({
     initialValues: {
-      name: "",
+      name: "" || channel.name,
     },
     validationSchema: getSchema(),
     onSubmit: async (values) => {
-      console.log(values);
       try {
-        const newChannel = { name: values.name };
-        axios
-          .post("/api/v1/channels", newChannel, {
+        const editedChannel = { name: values.name };
+        await axios
+          .patch(`/api/v1/channels/${channel.id}`, editedChannel, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           })
           .then((response) => {
             setShowModal(false);
-            setActiveChannel(response.data);
+            const update = channels.map((el) =>
+              el.id === response.data.id ? response.data : el
+            );
+            dispatch(setChannels(update));
             dispatch(setCurrentChannel(response.data));
           });
       } catch (e) {
@@ -62,16 +71,16 @@ const CreateChannel = ({ setShowModal, setActiveChannel }) => {
     <>
       <Modal show onHide={(e) => close(e)} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Добавить канал</Modal.Title>
+          <Modal.Title>Переименовать канал</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={formik.handleSubmit}>
             <Form.Group controlId="name">
               <Form.Control
                 onChange={formik.handleChange}
+                ref={inputRef}
                 value={formik.values.name}
                 isInvalid={formik.errors.name && formik.touched.name}
-                autoFocus
                 className="mb-2"
                 name="name"
                 disabled={formik.isSubmitting}
@@ -104,4 +113,4 @@ const CreateChannel = ({ setShowModal, setActiveChannel }) => {
   );
 };
 
-export default CreateChannel;
+export default RenameChannel;

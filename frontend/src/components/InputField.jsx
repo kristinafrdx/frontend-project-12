@@ -5,36 +5,40 @@ import { setMessages } from "../slices/messagesSlice";
 
 const InputField = ({ channelId }) => {
   const [message, setMessage] = useState("");
-  const [disabled, setDisabled] = useState(true)
-  const userName = localStorage.getItem('username');
-  const token = localStorage.getItem('token');
+  const [disabled, setDisabled] = useState(true);
+  const userName = localStorage.getItem("username");
+  const token = localStorage.getItem("token");
 
   const handleMessage = (e) => {
-    if( e.target.value.length > 0) {
+    if (e.target.value.length > 0) {
       setMessage(e.target.value);
       setDisabled(false);
     } else {
       setDisabled(true);
-      setMessage('')
+      setMessage("");
     }
-  }
+  };
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    const newMessage = { body: message, channelId: channelId, username: userName };
-    await axios.post('/api/v1/messages', newMessage, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    .then((response) => {
-      // console.log(response.data); // => { id: '1', body: 'new message', channelId: '1', username: 'admin }
-      setMessage('')
-    })
-    .catch((e) => {
-      console.log(e)
-    })
-  }
-  
+    e.preventDefault();
+    const newMessage = {
+      body: message,
+      channelId: channelId,
+      username: userName,
+    };
+    await axios
+      .post("/api/v1/messages", newMessage, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        // console.log(response.data); // => { id: '1', body: 'new message', channelId: '1', username: 'admin }
+        setMessage("");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
 
   return (
     <div className="mt-auto px-5 py-3">
@@ -48,9 +52,9 @@ const InputField = ({ channelId }) => {
             value={message}
             onChange={(e) => handleMessage(e)}
           />
-          <button 
+          <button
             type="submit"
-            disabled={disabled} 
+            disabled={disabled}
             className="btn btn-group-vertical"
             onClick={(e) => handleSubmit(e)}
           >
