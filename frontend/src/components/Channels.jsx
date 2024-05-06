@@ -7,8 +7,11 @@ import DeleteChannel from "./DeleteChannel";
 import { addChanel } from "../slices/channelsSlice";
 import { io } from "socket.io-client";
 import RenameChannel from "./RenameChannel";
+import { useTranslation } from 'react-i18next';
 
 const Channels = () => {
+  const { t } = useTranslation();
+
   const initChannel = useSelector(
     (state) => state.currentChannel.currentChannel
   );
@@ -56,7 +59,7 @@ const Channels = () => {
     <>
       <div className="col-4 col-md-2 border-end px-0 bg-light flex-column h-100 d-flex">
         <div className="d-flex mt-1 justify-content-between mb-2 ps-4 pe-2 p-4">
-          <b>Каналы</b>
+          <b>{t('chat.channels')}</b>
           <button
             type="button"
             className="p-0 text-primary btn btn-group-vertical"
@@ -72,7 +75,9 @@ const Channels = () => {
               <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"></path>
               <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"></path>
             </svg>
-            <span className="visually-hidden">+</span>
+            <span className="visually-hidden">
+              {t('signs.plus')}
+            </span>
           </button>
         </div>
         <ul
@@ -92,7 +97,9 @@ const Channels = () => {
                 `}
                   onClick={() => handleChannel(channel)}
                 >
-                  <span className="me-1">#</span>
+                  <span className="me-1">
+                    {t('signs.sharp')}
+                  </span>
                   {channel.name}
                 </button>
               </li>
@@ -107,7 +114,9 @@ const Channels = () => {
                     }`}
                     onClick={() => handleChannel(channel)}
                   >
-                    <span className="me-1">#</span>
+                    <span className="me-1">
+                    {t('signs.sharp')}
+                    </span>
                     {channel.name}
                   </Button>
                   <Dropdown.Toggle
@@ -119,10 +128,10 @@ const Channels = () => {
                   ></Dropdown.Toggle>
                   <Dropdown.Menu onClick={() => handleChannel(channel)}>
                     <Dropdown.Item onClick={() => handleDelete(channel)}>
-                      Удалить
+                    {t('chat.remove')}
                     </Dropdown.Item>
                     <Dropdown.Item onClick={() => handleRename(channel)}>
-                      Переименовать
+                    {t('chat.rename')}
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>

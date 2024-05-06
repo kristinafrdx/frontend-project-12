@@ -6,6 +6,7 @@ import Header from "./Header.jsx";
 import Field from "./Field";
 import Channels from "./Channels";
 import { setMessages } from "../slices/messagesSlice";
+import { useTranslation } from 'react-i18next';
 
 const Chat = () => {
   const token = localStorage.getItem("token");
@@ -63,7 +64,6 @@ const Chat = () => {
         </div>
         <div className="Toastify"></div>
       </div>
-      {/* { showModal && <CreateChannel /> } */}
     </>
   );
 };

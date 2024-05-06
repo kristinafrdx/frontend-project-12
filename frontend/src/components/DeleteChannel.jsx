@@ -4,8 +4,11 @@ import axios from "axios";
 import { setChannels } from "../slices/channelsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { removeMessages } from "../slices/messagesSlice";
+import { useTranslation } from 'react-i18next';
 
 const DeleteChannel = ({ channel, setShowDeleteWindow, handleChannel }) => {
+  const { t } = useTranslation();
+  
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
   const channels = useSelector((state) => state.channels.channels);
@@ -42,24 +45,24 @@ const DeleteChannel = ({ channel, setShowDeleteWindow, handleChannel }) => {
     <>
       <Modal show centered onHide={closeWindow}>
         <Modal.Header closeButton>
-          <Modal.Title>Удалить канал</Modal.Title>
+          <Modal.Title>{t('chat.removeChannel')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p className="lead">Уверены?</p>
+          <p className="lead">{t('chat.sure')}</p>
           <div className="d-flex justify-content-end">
             <button
               type="button"
               className="me-2 btn btn-secondary"
               onClick={closeWindow}
             >
-              Отменить
+              {t('chat.cancel')}
             </button>
             <button
               type="submit"
               className="btn btn-danger"
               onClick={handleDelete}
             >
-              Удалить
+              {t('chat.remove')}
             </button>
           </div>
         </Modal.Body>

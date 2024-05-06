@@ -6,8 +6,10 @@ import * as yup from "yup";
 import axios from "axios";
 import { setChannels } from "../slices/channelsSlice";
 import { setCurrentChannel } from "../slices/currentChannelSlice";
+import { useTranslation } from 'react-i18next';
 
 const RenameChannel = ({ setShowModal, channel }) => {
+  const { t } = useTranslation();
   const channels = useSelector((state) => state.channels.channels);
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
@@ -33,10 +35,10 @@ const RenameChannel = ({ setShowModal, channel }) => {
       name: yup
         .string()
         .trim()
-        .required("Обязательное поле")
-        .min(3, "От 3-20 символов")
-        .max(20, "От 3-20 символов")
-        .notOneOf(names, "Должно быть уникальным"),
+        .required(t('errors.required'))
+        .min(3, t('errors.minMax'))
+        .max(20, t('errors.minMax'))
+        .notOneOf(names, t('errors.uniq')),
     });
 
   const formik = useFormik({
@@ -71,7 +73,7 @@ const RenameChannel = ({ setShowModal, channel }) => {
     <>
       <Modal show onHide={(e) => close(e)} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Переименовать канал</Modal.Title>
+          <Modal.Title>{t('chat.renameChannel')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={formik.handleSubmit}>
@@ -95,14 +97,14 @@ const RenameChannel = ({ setShowModal, channel }) => {
                   onClick={close}
                   className="me-2 btn btn-secondary"
                 >
-                  Отменить
+                  {t('chat.cancel')}
                 </button>
                 <button
                   type="submit"
                   className="btn btn-primary"
                   disabled={formik.isSubmitting}
                 >
-                  Отправить
+                 {t('chat.send')}
                 </button>
               </div>
             </Form.Group>
