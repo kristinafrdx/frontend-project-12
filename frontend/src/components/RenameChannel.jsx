@@ -7,6 +7,8 @@ import axios from "axios";
 import { setChannels } from "../slices/channelsSlice";
 import { setCurrentChannel } from "../slices/currentChannelSlice";
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const RenameChannel = ({ setShowModal, channel }) => {
   const { t } = useTranslation();
@@ -62,9 +64,11 @@ const RenameChannel = ({ setShowModal, channel }) => {
             );
             dispatch(setChannels(update));
             dispatch(setCurrentChannel(response.data));
+            toast.success(t('toasts.successRename'))
           });
       } catch (e) {
         console.log(e);
+        toast.error(t('toasts.errorRename'))
       }
     },
   });

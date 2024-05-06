@@ -6,7 +6,8 @@ import Header from "./Header.jsx";
 import Field from "./Field";
 import Channels from "./Channels";
 import { setMessages } from "../slices/messagesSlice";
-import { useTranslation } from 'react-i18next';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Chat = () => {
   const token = localStorage.getItem("token");
@@ -62,7 +63,7 @@ const Chat = () => {
             </div>
           </div>
         </div>
-        <div className="Toastify"></div>
+        <ToastContainer />
       </div>
     </>
   );

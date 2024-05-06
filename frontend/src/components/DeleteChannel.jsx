@@ -5,6 +5,8 @@ import { setChannels } from "../slices/channelsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { removeMessages } from "../slices/messagesSlice";
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const DeleteChannel = ({ channel, setShowDeleteWindow, handleChannel }) => {
   const { t } = useTranslation();
@@ -35,9 +37,11 @@ const DeleteChannel = ({ channel, setShowDeleteWindow, handleChannel }) => {
           dispatch(removeMessages(currentChannel.id));
           dispatch(setChannels(update));
           handleChannel(defaultChannel);
+          toast.success(t('toasts.successRemove'))
         });
     } catch (e) {
       console.log(e);
+      toast.error(t('toasts.errorRemove'))
     }
   };
 

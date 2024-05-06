@@ -50,6 +50,14 @@ const translation = {
       "notfoundPage": "Страница не найдена",
       "canGo": "Но вы можете перейти ",
       "linkToPage": "на главную страницу"
+    },
+    "toasts": {
+      "successRename": "Канал переименован",
+      "errorRename": "Не удалось переименовать",
+      "successCreate": "Канал создан",
+      "errorCreate": "Не удалось создать",
+      "successRemove": "Канал удален",
+      "errorRemove": "Не удалось удалить",
     }
   }
 }

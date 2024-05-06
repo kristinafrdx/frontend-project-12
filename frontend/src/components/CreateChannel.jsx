@@ -6,6 +6,8 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import { Modal, Form } from "react-bootstrap";
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CreateChannel = ({ setShowModal, setActiveChannel }) => {
   const { t } = useTranslation();
@@ -52,9 +54,11 @@ const CreateChannel = ({ setShowModal, setActiveChannel }) => {
             setShowModal(false);
             setActiveChannel(response.data);
             dispatch(setCurrentChannel(response.data));
+            toast.success(t('toasts.successCreate'))
           });
       } catch (e) {
         console.log(e);
+        toast.error(t('toasts.errorCreate'))
       }
     },
   });
