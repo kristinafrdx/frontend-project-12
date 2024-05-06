@@ -2,11 +2,11 @@ import React from "react";
 import { resetToken, resetUserName } from "../slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
   const { t } = useTranslation();
-  const token = useSelector(state => state.user.token);
+  const token = useSelector((state) => state.user.token);
   const isAuthorized = token ? true : false;
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -14,25 +14,25 @@ const Header = () => {
   const handleLogout = () => {
     dispatch(resetToken());
     dispatch(resetUserName());
-    localStorage.removeItem('token');
-    localStorage.removeItem('username');
-    navigate('/login');
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    navigate("/login");
   };
 
   return (
     <nav className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
       <div className="container">
         <a className="navbar-brand" href="/">
-          {t('header.hexlet')}
+          {t("header.hexlet")}
         </a>
-        { isAuthorized && (
+        {isAuthorized && (
           <button
-          type="button"
-          className="btn btn-primary"
-          onClick={handleLogout}
-        >
-          {t('header.exit')}
-        </button>
+            type="button"
+            className="btn btn-primary"
+            onClick={handleLogout}
+          >
+            {t("header.exit")}
+          </button>
         )}
       </div>
     </nav>

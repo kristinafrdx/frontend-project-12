@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Messages from "./Messages";
 import { setMessages } from "../slices/messagesSlice";
 import { io } from "socket.io-client";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 const Field = () => {
   const { t } = useTranslation();
@@ -27,11 +27,13 @@ const Field = () => {
     return (next) => (action) => next(action);
   }, []);
 
+  /* eslint-disable */
   useEffect(() => {
     if (messagesLocal) {
       dispatch(setMessages(messagesLocal));
     }
   }, [messagesLocal]);
+  /* eslint-enable */
 
   return (
     <>
@@ -39,10 +41,12 @@ const Field = () => {
         <div className="d-flex flex-column h-100">
           <div className="bg-light mb-4 p-3 shadow-sm small">
             <p className="m-0">
-              <b>{t('signs.sharp')} {currentChannel && currentChannel.name}</b>
+              <b>
+                {t("signs.sharp")} {currentChannel && currentChannel.name}
+              </b>
             </p>
             <span className="text-muted">
-              {t('chat.key', { count: messageOfChannel.length})}
+              {t("chat.key", { count: messageOfChannel.length })}
             </span>
           </div>
           <div id="messages-box" className="chat-messages overflow-auto px-5">

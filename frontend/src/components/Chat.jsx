@@ -6,14 +6,14 @@ import Header from "./Header.jsx";
 import Field from "./Field";
 import Channels from "./Channels";
 import { setMessages } from "../slices/messagesSlice";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Chat = () => {
   const token = localStorage.getItem("token");
 
   const dispatch = useDispatch();
-  
+
   const getChannels = async (token) => {
     await axios
       .get("/api/v1/channels", {
@@ -46,14 +46,16 @@ const Chat = () => {
       });
   };
 
+  /* eslint-disable */
   useEffect(() => {
     getChannels(token);
     getMessages(token);
   }, [token]);
+  /* eslint-enable */
 
   return (
     <>
-    <Header />
+      <Header />
       <div className="h-100" id="chat">
         <div className="d-flex flex-column h-100">
           <div className="container h-100 my-4 overflow-hidden rounded shadow">

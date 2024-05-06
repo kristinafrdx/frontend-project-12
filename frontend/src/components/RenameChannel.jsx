@@ -6,16 +6,17 @@ import * as yup from "yup";
 import axios from "axios";
 import { setChannels } from "../slices/channelsSlice";
 import { setCurrentChannel } from "../slices/currentChannelSlice";
-import { useTranslation } from 'react-i18next';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useRollbar } from "@rollbar/react";
 
 const RenameChannel = ({ setShowModal, channel }) => {
   const { t } = useTranslation();
   const channels = useSelector((state) => state.channels.channels);
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
-
+  const rollbar = useRollbar();
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -37,10 +38,10 @@ const RenameChannel = ({ setShowModal, channel }) => {
       name: yup
         .string()
         .trim()
-        .required(t('errors.required'))
-        .min(3, t('errors.minMax'))
-        .max(20, t('errors.minMax'))
-        .notOneOf(names, t('errors.uniq')),
+        .required(t("errors.required"))
+        .min(3, t("errors.minMax"))
+        .max(20, t("errors.minMax"))
+        .notOneOf(names, t("errors.uniq")),
     });
 
   const formik = useFormik({
@@ -64,11 +65,12 @@ const RenameChannel = ({ setShowModal, channel }) => {
             );
             dispatch(setChannels(update));
             dispatch(setCurrentChannel(response.data));
-            toast.success(t('toasts.successRename'))
+            toast.success(t("toasts.successRename"));
           });
       } catch (e) {
         console.log(e);
-        toast.error(t('toasts.errorRename'))
+        toast.error(t("toasts.errorRename"));
+        rollbar.error("Rename channel", e);
       }
     },
   });
@@ -77,7 +79,7 @@ const RenameChannel = ({ setShowModal, channel }) => {
     <>
       <Modal show onHide={(e) => close(e)} centered>
         <Modal.Header closeButton>
-          <Modal.Title>{t('chat.renameChannel')}</Modal.Title>
+          <Modal.Title>{t("chat.renameChannel")}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={formik.handleSubmit}>
@@ -101,14 +103,14 @@ const RenameChannel = ({ setShowModal, channel }) => {
                   onClick={close}
                   className="me-2 btn btn-secondary"
                 >
-                  {t('chat.cancel')}
+                  {t("chat.cancel")}
                 </button>
                 <button
                   type="submit"
                   className="btn btn-primary"
                   disabled={formik.isSubmitting}
                 >
-                 {t('chat.send')}
+                  {t("chat.send")}
                 </button>
               </div>
             </Form.Group>

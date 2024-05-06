@@ -1,5 +1,5 @@
 import React from "react";
-import leo from 'leo-profanity';
+import leo from "leo-profanity";
 
 const Messages = ({ username, message }) => {
   return (

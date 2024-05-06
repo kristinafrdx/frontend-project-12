@@ -5,13 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { Modal, Form } from "react-bootstrap";
-import { useTranslation } from 'react-i18next';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useRollbar } from "@rollbar/react";
 
 const CreateChannel = ({ setShowModal, setActiveChannel }) => {
   const { t } = useTranslation();
   const channels = useSelector((state) => state.channels.channels);
+  const rollbar = useRollbar();
 
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
@@ -30,10 +32,10 @@ const CreateChannel = ({ setShowModal, setActiveChannel }) => {
       name: yup
         .string()
         .trim()
-        .required(t('errors.required'))
-        .min(3, t('errors.minMax'))
-        .max(20, t('errors.minMax'))
-        .notOneOf(names, t('errors.uniq')),
+        .required(t("errors.required"))
+        .min(3, t("errors.minMax"))
+        .max(20, t("errors.minMax"))
+        .notOneOf(names, t("errors.uniq")),
     });
 
   const formik = useFormik({
@@ -54,11 +56,12 @@ const CreateChannel = ({ setShowModal, setActiveChannel }) => {
             setShowModal(false);
             setActiveChannel(response.data);
             dispatch(setCurrentChannel(response.data));
-            toast.success(t('toasts.successCreate'))
+            toast.success(t("toasts.successCreate"));
           });
       } catch (e) {
         console.log(e);
-        toast.error(t('toasts.errorCreate'))
+        toast.error(t("toasts.errorCreate"));
+        rollbar.error("Create channel", e);
       }
     },
   });
@@ -67,7 +70,7 @@ const CreateChannel = ({ setShowModal, setActiveChannel }) => {
     <>
       <Modal show onHide={(e) => close(e)} centered>
         <Modal.Header closeButton>
-          <Modal.Title>{t('chat.addChannel')}</Modal.Title>
+          <Modal.Title>{t("chat.addChannel")}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={formik.handleSubmit}>
@@ -91,14 +94,14 @@ const CreateChannel = ({ setShowModal, setActiveChannel }) => {
                   onClick={close}
                   className="me-2 btn btn-secondary"
                 >
-                  {t('chat.cancel')}
+                  {t("chat.cancel")}
                 </button>
                 <button
                   type="submit"
                   className="btn btn-primary"
                   disabled={formik.isSubmitting}
                 >
-                  {t('chat.send')}
+                  {t("chat.send")}
                 </button>
               </div>
             </Form.Group>

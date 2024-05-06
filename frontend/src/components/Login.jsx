@@ -6,14 +6,15 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setToken, setUserName } from "../slices/authSlice";
 import Header from "./Header";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
+import { useRollbar } from "@rollbar/react";
 
 const Login = () => {
   const navigate = useNavigate();
   const [err, setError] = useState(null);
   const dispatch = useDispatch();
   const { t } = useTranslation();
-
+  const rollbar = useRollbar();
   const addToken = (token) => dispatch(setToken(token));
   const addUserName = (name) => dispatch(setUserName(name));
 
@@ -37,6 +38,7 @@ const Login = () => {
       } catch (error) {
         console.error("Ошибка при отправке запроса:", error);
         setError(true);
+        rollbar.error("Login page", error);
       }
     },
   });
@@ -60,7 +62,7 @@ const Login = () => {
                   className="col-12 col-md-6 mt-3 mt-mb-0"
                   onSubmit={formik.handleSubmit}
                 >
-                  <h1 className="text-center mb-4">{t('login.login')}</h1>
+                  <h1 className="text-center mb-4">{t("login.login")}</h1>
                   <div className="form-group form-floating mb-3">
                     <input
                       type="username"
@@ -70,7 +72,7 @@ const Login = () => {
                       value={formik.values.username}
                       autoComplete="username"
                     />
-                    <label htmlFor="email">{t('login.username')}</label>
+                    <label htmlFor="email">{t("login.username")}</label>
                   </div>
                   <div className="form-group form-floating mb-4">
                     <input
@@ -81,10 +83,10 @@ const Login = () => {
                       value={formik.values.password}
                       autoComplete="password"
                     />
-                    <label htmlFor="password">{t('login.password')}</label>
+                    <label htmlFor="password">{t("login.password")}</label>
                     {err && (
                       <div className="invalid-tooltip">
-                        {t('errors.wrongLogin')}
+                        {t("errors.wrongLogin")}
                       </div>
                     )}
                   </div>
@@ -92,15 +94,15 @@ const Login = () => {
                     type="submit"
                     className="w-100 mb-3 btn btn-outline-primary"
                   >
-                    {t('login.login')}
+                    {t("login.login")}
                   </button>
                 </form>
               </div>
 
               <div className="card-footer p-4">
                 <div className="text-center">
-                  <span>{t('login.notAnAccount')}</span>
-                  <a href="/signup">{t('login.linkToRegistration')}</a>
+                  <span>{t("login.notAnAccount")}</span>
+                  <a href="/signup">{t("login.linkToRegistration")}</a>
                 </div>
               </div>
             </div>
