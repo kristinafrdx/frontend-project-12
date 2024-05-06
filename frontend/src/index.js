@@ -14,13 +14,15 @@ import {
 } from "@rollbar/react";
 
 const rollbarConfig = {
-  accessToken: "a7db1e930afb4c3ab5369ddcdc6fab7e",
+  accessToken: process.env.REACT_APP_MY_TOKEN,
   payload: {
     environment: "production",
   },
   captureUncaught: true,
   captureUnhandledRejections: true,
 };
+
+console.log(process.env.REACT_APP_MY_TOKEN)
 
 const root = ReactDOM.createRoot(document.getElementById("chat"));
 root.render(

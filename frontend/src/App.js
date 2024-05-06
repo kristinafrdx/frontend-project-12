@@ -15,7 +15,6 @@ function App() {
   const token = useSelector((state) => state.user.token);
   // const token = localStorage.getItem("token");
   const isAuthorized = token ? true : false;
-
   return (
     <div className="d-flex flex-column h-100">
       <Router>
