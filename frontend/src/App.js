@@ -10,6 +10,16 @@ import Login from "./components/Login";
 import Chat from "./components/Chat";
 import { useSelector } from "react-redux";
 import Registration from "./components/Registration";
+import { Provider, ErrorBoundary } from '@rollbar/react'
+
+const rollbarConfig = {
+  accessToken: 'a7db1e930afb4c3ab5369ddcdc6fab7e',
+  environment: 'testenv',
+}
+function TestError() {
+  const a = null
+  return a.hello()
+}
 
 function App() {
   const token = useSelector(state => state.user.token);
@@ -17,7 +27,10 @@ function App() {
   const isAuthorized = token ? true : false;
 
   return (
+    <Provider config={rollbarConfig}>
+    <ErrorBoundary>
     <div className="d-flex flex-column h-100">
+    <TestError />
     <Router>
         <Routes>
           <Route path="/" element={isAuthorized ? <Chat /> : <Navigate to='/login' /> } />
@@ -27,6 +40,8 @@ function App() {
         </Routes>
       </Router>
     </div>
+    </ErrorBoundary>
+    </Provider>
   );
 }
 
