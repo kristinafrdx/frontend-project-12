@@ -8,6 +8,7 @@ import { addChanel } from "../slices/channelsSlice";
 import { io } from "socket.io-client";
 import RenameChannel from "./RenameChannel";
 import { useTranslation } from 'react-i18next';
+import leo from 'leo-profanity';
 
 const Channels = () => {
   const { t } = useTranslation();
@@ -54,6 +55,7 @@ const Channels = () => {
       dispatch(addChanel(updateChannel));
     }
   }, [updateChannel]);
+
 
   return (
     <>
@@ -117,7 +119,7 @@ const Channels = () => {
                     <span className="me-1">
                     {t('signs.sharp')}
                     </span>
-                    {channel.name}
+                    {leo.clean(channel.name)} 
                   </Button>
                   <Dropdown.Toggle
                     variant="text-start"

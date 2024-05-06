@@ -1,10 +1,11 @@
 import React from "react";
+import leo from 'leo-profanity';
 
 const Messages = ({ username, message }) => {
   return (
     <div className="text-break mb-2">
       <b>{username}</b>: {"\u00A0"}
-      {message}
+      {leo.clean(message)}
     </div>
   );
 };
