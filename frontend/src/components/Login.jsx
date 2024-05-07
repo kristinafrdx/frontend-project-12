@@ -39,6 +39,7 @@ const Login = () => {
         console.error("Ошибка при отправке запроса:", error);
         setError(true);
         rollbar.error("Login page", error);
+        console.log(error)
       }
     },
   });
@@ -71,6 +72,7 @@ const Login = () => {
                       onChange={formik.handleChange}
                       value={formik.values.username}
                       autoComplete="username"
+                      required
                     />
                     <label htmlFor="email">{t("login.username")}</label>
                   </div>
@@ -82,6 +84,7 @@ const Login = () => {
                       onChange={formik.handleChange}
                       value={formik.values.password}
                       autoComplete="password"
+                      required
                     />
                     <label htmlFor="password">{t("login.password")}</label>
                     {err && (
