@@ -107,26 +107,26 @@ const Channels = () => {
               </li>
             ) : (
               <li className="nav-item w-100" key={channel.id}>
-                <Dropdown as={ButtonGroup} className="d-flex btn-group">
-                  <button
-                    className={`w-100 rounded-0 text-truncate text-start btn ${
-                      Number(initChannel.id) === Number(channel.id) &&
-                      "btn-secondary"
-                    }`}
-                    style={{boxShadow: "none"}}
+                <Dropdown as={ButtonGroup} className="d-flex">
+                  <Button
+                    type="button"
+                    className={`w-100 rounded-0 text-start text-truncate`}
+                    variant={`${ Number(initChannel.id) === Number(channel.id) && "secondary" }`}
                     onClick={() => handleChannel(channel)}
                   >
                     <span className="me-1">{t("signs.sharp")}</span>
                     {leo.clean(channel.name)}
-                  </button>
-                  <button 
-                    type="button" 
-                    id="react-aria1187044266-:r0:" 
-                    aria-expanded="false" 
-                    className="flex-grow-0 dropdown-toggle dropdown-toggle-split btn"
+                  </Button>
+                  <Dropdown.Toggle
+                    type="button"
+                    id="react-aria9230295641-1"
+                    split
+                    className={`border-0 
+                    `}
+                    variant={`${ Number(initChannel.id) === Number(channel.id) && "secondary"}`}
                   >
                     <span className="visually-hidden">Управление каналом</span>
-                  </button>
+                  </Dropdown.Toggle>
                   <Dropdown.Menu onClick={() => setActiveChannel(channel)}>
                     <Dropdown.Item onClick={() => handleDelete()}>
                       {t("chat.remove")}
