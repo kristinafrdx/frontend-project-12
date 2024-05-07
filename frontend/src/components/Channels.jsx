@@ -93,7 +93,7 @@ const Channels = () => {
               <li className="nav-item w-100" key={channel.id}>
                 <button
                   type="button"
-                  className={`w-100 rounded-0 text-truncate btn-text-start btn 
+                  className={`w-100 rounded-0 text-truncate btn text-start
                 ${
                   Number(initChannel.id) === Number(channel.id) &&
                   "btn-secondary"
@@ -109,7 +109,7 @@ const Channels = () => {
               <li className="nav-item w-100" key={channel.id}>
                 <Dropdown as={ButtonGroup} className="d-flex btn-group">
                   <button
-                    className={`w-100 rounded-0 text-truncate btn-text-start btn ${
+                    className={`w-100 rounded-0 text-truncate text-start btn ${
                       Number(initChannel.id) === Number(channel.id) &&
                       "btn-secondary"
                     }`}
@@ -119,16 +119,14 @@ const Channels = () => {
                     <span className="me-1">{t("signs.sharp")}</span>
                     {leo.clean(channel.name)}
                   </button>
-                  <Dropdown.Toggle
-                    variant="text-start"
-                    className={`rounded-0 text-start ${
-                      Number(initChannel.id) === Number(channel.id) &&
-                      "btn-secondary"
-                    }
-                    `}
+                  <button 
+                    type="button" 
+                    id="react-aria1187044266-:r0:" 
+                    aria-expanded="false" 
+                    className="flex-grow-0 dropdown-toggle dropdown-toggle-split btn"
                   >
-                    <span className="visually-hidden">Управление каналом</span>
-                  </Dropdown.Toggle>
+                    <span class="visually-hidden">{t('chat.manage')}</span>
+                  </button>
                   <Dropdown.Menu onClick={() => setActiveChannel(channel)}>
                     <Dropdown.Item onClick={() => handleDelete()}>
                       {t("chat.remove")}

@@ -41,7 +41,8 @@ const translation = {
       "send": "Отправить",
       "addChannel": "Добавить канал",
       "sure": "Уверены?",
-      "nameChannel": "Имя канала"
+      "nameChannel": "Имя канала",
+      "manage": "Управление каналом",
     },
     "signs": {
       "sharp": "#",
