@@ -93,7 +93,7 @@ const RenameChannel = ({ setShowModal, channel }) => {
                 name="name"
                 disabled={formik.isSubmitting}
               />
-              <Form.Label visuallyHidden />
+              <Form.Label visuallyHidden>Имя канала</Form.Label>
               <Form.Control.Feedback type="invalid">
                 {formik.errors.name}
               </Form.Control.Feedback>
