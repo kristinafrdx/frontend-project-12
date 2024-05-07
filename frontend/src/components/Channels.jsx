@@ -93,7 +93,8 @@ const Channels = () => {
               <li className="nav-item w-100" key={channel.id}>
                 <Button
                   type="button"
-                  className={`w-100 rounded-0 btn-text-start text-truncate
+                  variant="text-start"
+                  className={`w-100 rounded-0 text-truncate
                 ${
                   Number(initChannel.id) === Number(channel.id) &&
                   "btn-secondary"
@@ -110,7 +111,7 @@ const Channels = () => {
                 <Dropdown as={ButtonGroup} className="d-flex btn-group">
                   <Button
                     variant="text-start"
-                    className={`w-100 rounded-0 text-start text-truncate ${
+                    className={`w-100 rounded-0 text-truncate ${
                       Number(initChannel.id) === Number(channel.id) &&
                       "btn-secondary"
                     }`}
