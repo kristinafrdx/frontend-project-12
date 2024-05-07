@@ -8,6 +8,7 @@ import { setToken, setUserName } from "../slices/authSlice";
 import Header from "./Header";
 import { useTranslation } from "react-i18next";
 import { useRollbar } from "@rollbar/react";
+import { Form } from "react-bootstrap";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -59,13 +60,13 @@ const Login = () => {
                     alt="Войти"
                   ></img>
                 </div>
-                <form
+                <Form
                   className="col-12 col-md-6 mt-3 mt-mb-0"
                   onSubmit={formik.handleSubmit}
                 >
                   <h1 className="text-center mb-4">{t("login.login")}</h1>
                   <div className="form-group form-floating mb-3">
-                    <input
+                    <Form.Control
                       type="username"
                       name="username"
                       className={`form-control ${err ? "is-invalid" : ""}`}
@@ -73,24 +74,26 @@ const Login = () => {
                       value={formik.values.username}
                       autoComplete="username"
                       required
+                      placeholder="Ваш ник"
                     />
                     <label htmlFor="email">{t("login.username")}</label>
                   </div>
                   <div className="form-group form-floating mb-4">
-                    <input
+                    <Form.Control
                       type="password"
                       name="password"
                       className={`form-control ${err ? "is-invalid" : ""}`}
                       onChange={formik.handleChange}
                       value={formik.values.password}
-                      autoComplete="password"
+                      autoComplete="current-password"
+                      placeholder="Пароль"
                       required
                     />
                     <label htmlFor="password">{t("login.password")}</label>
                     {err && (
-                      <div className="invalid-tooltip">
+                      <Form.Control.Feedback className="invalid-tooltip" style={{ width: "unset" }}>
                         {t("errors.wrongLogin")}
-                      </div>
+                      </Form.Control.Feedback>
                     )}
                   </div>
                   <button
@@ -99,7 +102,7 @@ const Login = () => {
                   >
                     {t("login.login")}
                   </button>
-                </form>
+                </Form>
               </div>
 
               <div className="card-footer p-4">
