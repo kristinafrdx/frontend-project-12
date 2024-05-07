@@ -21,6 +21,7 @@ const Login = () => {
   const addUserName = (name) => dispatch(setUserName(name));
 
   const inputRef = useRef(null);
+
   useEffect(() => {
     if (err) {
       inputRef.current.focus();

@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 import { useRollbar } from "@rollbar/react";
+import { Formik } from "formik";
 
 const InputField = ({ channelId }) => {
   const { t } = useTranslation();
@@ -10,6 +11,14 @@ const InputField = ({ channelId }) => {
   const userName = localStorage.getItem("username");
   const token = localStorage.getItem("token");
   const rollbar = useRollbar();
+
+  const inputRef = useRef(null);
+  
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [channelId]);
 
   const handleMessage = (e) => {
     if (e.target.value.length > 0) {
@@ -53,6 +62,8 @@ const InputField = ({ channelId }) => {
             className="border-0 p-0 ps-2 form-control"
             value={message}
             onChange={(e) => handleMessage(e)}
+            autoFocus
+            ref={inputRef}
           />
           <button
             type="submit"
