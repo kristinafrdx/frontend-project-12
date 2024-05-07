@@ -53,11 +53,11 @@ const translation = {
     },
     "toasts": {
       "successRename": "Канал переименован",
-      "errorRename": "Не удалось переименовать",
+      "errorRename": "Ошибка соединения",
       "successCreate": "Канал создан",
-      "errorCreate": "Не удалось создать",
+      "errorCreate": "Ошибка соединения",
       "successRemove": "Канал удален",
-      "errorRemove": "Не удалось удалить",
+      "errorRemove": "Ошибка соединения",
     }
   }
 }
