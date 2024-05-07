@@ -125,7 +125,7 @@ const Channels = () => {
                     aria-expanded="false" 
                     className="flex-grow-0 dropdown-toggle dropdown-toggle-split btn"
                   >
-                    <span class="visually-hidden">{t('chat.manage')}</span>
+                    <span className="visually-hidden">Управление каналом</span>
                   </button>
                   <Dropdown.Menu onClick={() => setActiveChannel(channel)}>
                     <Dropdown.Item onClick={() => handleDelete()}>
