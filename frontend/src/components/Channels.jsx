@@ -91,9 +91,9 @@ const Channels = () => {
           {channels.map((channel) =>
             !channel.removable ? (
               <li className="nav-item w-100" key={channel.id}>
-                <button
+                <Button
                   type="button"
-                  className={`w-100 rounded-0 text-start text-truncate 
+                  className={`w-100 rounded-0 btn-text-start text-truncate
                 ${
                   Number(initChannel.id) === Number(channel.id) &&
                   "btn-secondary"
@@ -103,7 +103,7 @@ const Channels = () => {
                 >
                   <span className="me-1">{t("signs.sharp")}</span>
                   {channel.name}
-                </button>
+                </Button>
               </li>
             ) : (
               <li className="nav-item w-100" key={channel.id}>
