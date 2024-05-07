@@ -1,2 +1,6 @@
 @import 'App.css';
-@import '~bootstrap/dist/css/bootstrap.min.css'
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+.btn-secondary:focus-visible {
+  --bs-btn-focus-box-shadow: none;
+}
