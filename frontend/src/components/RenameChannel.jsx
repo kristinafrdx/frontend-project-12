@@ -93,7 +93,6 @@ const RenameChannel = ({ setShowModal, channel }) => {
                 name="name"
                 disabled={formik.isSubmitting}
                 autoFocus
-                id='name'
               />
               <Form.Label visuallyHidden>Имя канала</Form.Label>
               <Form.Control.Feedback type="invalid">
