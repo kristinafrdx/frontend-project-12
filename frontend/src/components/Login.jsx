@@ -9,6 +9,7 @@ import Header from "./Header";
 import { useTranslation } from "react-i18next";
 import { useRollbar } from "@rollbar/react";
 import { Form } from "react-bootstrap";
+import { useRef, useEffect } from "react";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -18,6 +19,14 @@ const Login = () => {
   const rollbar = useRollbar();
   const addToken = (token) => dispatch(setToken(token));
   const addUserName = (name) => dispatch(setUserName(name));
+
+  const inputRef = useRef(null);
+  useEffect(() => {
+    if (err) {
+      inputRef.current.focus();
+      inputRef.current.select();
+    }
+  }, [err]);
 
   const formik = useFormik({
     initialValues: {
@@ -76,6 +85,7 @@ const Login = () => {
                       required
                       id="username"
                       placeholder="Ваш ник"
+                      ref={inputRef}
                     />
                     <label htmlFor="email">{t("login.username")}</label>
                   </div>
