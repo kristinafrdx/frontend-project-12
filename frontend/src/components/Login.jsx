@@ -74,6 +74,7 @@ const Login = () => {
                       value={formik.values.username}
                       autoComplete="username"
                       required
+                      id="username"
                       placeholder="Ваш ник"
                     />
                     <label htmlFor="email">{t("login.username")}</label>
@@ -82,6 +83,7 @@ const Login = () => {
                     <Form.Control
                       type="password"
                       name="password"
+                      id="password"
                       className={`form-control ${err ? "is-invalid" : ""}`}
                       onChange={formik.handleChange}
                       value={formik.values.password}
