@@ -127,7 +127,9 @@ const Channels = () => {
                       "btn-secondary"
                     }
                     `}
-                  ></Dropdown.Toggle>
+                  >
+                    <span className="visually-hidden">Управление каналом</span>
+                  </Dropdown.Toggle>
                   <Dropdown.Menu onClick={() => setActiveChannel(channel)}>
                     <Dropdown.Item onClick={() => handleDelete()}>
                       {t("chat.remove")}
