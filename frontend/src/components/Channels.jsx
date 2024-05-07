@@ -91,9 +91,9 @@ const Channels = () => {
           {channels.map((channel) =>
             !channel.removable ? (
               <li className="nav-item w-100" key={channel.id}>
-                <Button
+                <button
                   type="button"
-                  className={`w-100 rounded-0 text-truncate text-start
+                  className={`w-100 rounded-0 text-truncate btn-text-start btn 
                 ${
                   Number(initChannel.id) === Number(channel.id) &&
                   "btn-secondary"
@@ -103,13 +103,13 @@ const Channels = () => {
                 >
                   <span className="me-1">{t("signs.sharp")}</span>
                   {channel.name}
-                </Button>
+                </button>
               </li>
             ) : (
               <li className="nav-item w-100" key={channel.id}>
                 <Dropdown as={ButtonGroup} className="d-flex btn-group">
-                  <Button
-                    className={`w-100 rounded-0 text-truncate text-start ${
+                  <button
+                    className={`w-100 rounded-0 text-truncate btn-text-start btn ${
                       Number(initChannel.id) === Number(channel.id) &&
                       "btn-secondary"
                     }`}
@@ -118,7 +118,7 @@ const Channels = () => {
                   >
                     <span className="me-1">{t("signs.sharp")}</span>
                     {leo.clean(channel.name)}
-                  </Button>
+                  </button>
                   <Dropdown.Toggle
                     variant="text-start"
                     className={`rounded-0 text-start ${
