@@ -78,9 +78,8 @@ const RenameChannel = ({ setShowModal, channel }) => {
   return (
     <>
       <Modal show onHide={(e) => close(e)} centered>
-        <Modal.Header>
+        <Modal.Header closeButton>
           <Modal.Title>{t("chat.renameChannel")}</Modal.Title>
-          <button data-bs-dismiss="modal" aria-label="Close" className="btn btn-close" type="button" /> 
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={formik.handleSubmit}>
@@ -95,25 +94,26 @@ const RenameChannel = ({ setShowModal, channel }) => {
                 disabled={formik.isSubmitting}
                 autoFocus
               />
-              <Form.Label visuallyHidden>Имя канала</Form.Label>
+              <Form.Label visuallyHidden>{t('chat.nameChannel')}</Form.Label>
               <Form.Control.Feedback type="invalid">
                 {formik.errors.name}
               </Form.Control.Feedback>
               <div className="d-flex justify-content-end">
-                <button
+                <Button
                   type="button"
+                  variant="secondary"
                   onClick={close}
-                  className="me-2 btn btn-secondary"
+                  className="me-2"
                 >
                   {t("chat.cancel")}
-                </button>
-                <button
+                </Button>
+                <Button
                   type="submit"
-                  className="btn btn-primary"
+                  variant="primary"
                   disabled={formik.isSubmitting}
                 >
                   {t("chat.send")}
-                </button>
+                </Button>
               </div>
             </Form.Group>
           </Form>
