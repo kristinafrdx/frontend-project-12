@@ -105,23 +105,26 @@ const Channels = () => {
             ) : (
               <li className="nav-item w-100" key={channel.id}>
                 <Dropdown as={ButtonGroup} className="d-flex btn-group">
-                  <Button
-                    variant="text-start"
-                    className={`w-100 rounded-0 text-start btn ${
+                  <Button 
+                    type="button" 
+                    aria-expanded="false" 
+                    class={`w-100 rounded-0 text-start btn ${
                       Number(activeChannel.id) === Number(channel.id) &&
                       "btn-secondary"
                     }`}
                     onClick={() => handleChannel(channel)}
                   >
+                    <span className="visually-hidden">Управление каналом</span>
                     <span className="me-1">{t("signs.sharp")}</span>
                     {leo.clean(channel.name)}
                   </Button>
                   <Dropdown.Toggle
                     variant="text-start"
-                    className={`rounded-0 text-start btn ${
+                    className={`rounded-0 text-start ${
                       Number(activeChannel.id) === Number(channel.id) &&
                       "btn-secondary"
-                    }`}
+                    }
+                    `}
                   ></Dropdown.Toggle>
                   <Dropdown.Menu onClick={() => handleChannel(channel)}>
                     <Dropdown.Item onClick={() => handleDelete(channel)}>
