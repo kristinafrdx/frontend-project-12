@@ -74,7 +74,7 @@ const Login = () => {
                   onSubmit={formik.handleSubmit}
                 >
                   <h1 className="text-center mb-4">{t("login.login")}</h1>
-                  <div className="form-group form-floating mb-3">
+                  <Form.Group className="form-group form-floating mb-3">
                     <Form.Control
                       type="username"
                       name="username"
@@ -86,10 +86,11 @@ const Login = () => {
                       id="username"
                       placeholder="Ваш ник"
                       ref={inputRef}
+                      autoFocus
                     />
-                    <label htmlFor="email">{t("login.username")}</label>
-                  </div>
-                  <div className="form-group form-floating mb-4">
+                    <Form.Label htmlFor="email">{t("login.username")}</Form.Label>
+                  </Form.Group>
+                  <Form.Group className="form-group form-floating mb-4">
                     <Form.Control
                       type="password"
                       name="password"
@@ -101,13 +102,13 @@ const Login = () => {
                       placeholder="Пароль"
                       required
                     />
-                    <label htmlFor="password">{t("login.password")}</label>
+                    <Form.Label htmlFor="password">{t("login.password")}</Form.Label>
                     {err && (
                       <Form.Control.Feedback className="invalid-tooltip" style={{ width: "unset" }}>
                         {t("errors.wrongLogin")}
                       </Form.Control.Feedback>
                     )}
-                  </div>
+                  </Form.Group>
                   <button
                     type="submit"
                     className="w-100 mb-3 btn btn-outline-primary"

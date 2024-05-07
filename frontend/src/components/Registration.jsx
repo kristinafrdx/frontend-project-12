@@ -115,6 +115,7 @@ const Registration = () => {
                         (formik.errors.username && formik.touched.username) ||
                         err
                       }
+                      autoFocus
                     />
                     <Form.Control.Feedback
                       className="invalid-tooltip"
