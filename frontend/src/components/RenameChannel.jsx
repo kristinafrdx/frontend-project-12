@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRollbar } from "@rollbar/react";
+import leo from "leo-profanity";
 
 const RenameChannel = ({ setShowModal, channel }) => {
   const { t } = useTranslation();
@@ -46,7 +47,7 @@ const RenameChannel = ({ setShowModal, channel }) => {
 
   const formik = useFormik({
     initialValues: {
-      name: "" || channel.name,
+      name: "" || leo.clean(channel.name),
     },
     validationSchema: getSchema(),
     onSubmit: async (values) => {
