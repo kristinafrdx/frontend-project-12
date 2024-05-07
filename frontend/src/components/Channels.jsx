@@ -9,6 +9,7 @@ import { io } from "socket.io-client";
 import RenameChannel from "./RenameChannel";
 import { useTranslation } from "react-i18next";
 import leo from "leo-profanity";
+import { init } from "rollbar";
 
 const Channels = () => {
   const { t } = useTranslation();
@@ -35,11 +36,13 @@ const Channels = () => {
   };
 
   const handleDelete = () => {
+    setActiveChannel(activeChannel)
     setShowDeleteWindow(true);
   };
 
   const handleRename = () => {
     setShowRenameWindow(true);
+    setActiveChannel(activeChannel)
   };
 
   useEffect(() => {
@@ -92,7 +95,7 @@ const Channels = () => {
                   type="button"
                   className={`w-100 rounded-0 text-start btn 
                 ${
-                  Number(activeChannel.id) === Number(channel.id) &&
+                  Number(initChannel.id) === Number(channel.id) &&
                   "btn-secondary"
                 }
                 `}
@@ -108,7 +111,7 @@ const Channels = () => {
                   <Button
                     variant="text-start"
                     className={`w-100 rounded-0 text-start btn ${
-                      Number(activeChannel.id) === Number(channel.id) &&
+                      Number(initChannel.id) === Number(channel.id) &&
                       "btn-secondary"
                     }`}
                     style={{boxShadow: "none"}}
@@ -120,16 +123,16 @@ const Channels = () => {
                   <Dropdown.Toggle
                     variant="text-start"
                     className={`rounded-0 text-start ${
-                      Number(activeChannel.id) === Number(channel.id) &&
+                      Number(initChannel.id) === Number(channel.id) &&
                       "btn-secondary"
                     }
                     `}
                   ></Dropdown.Toggle>
-                  <Dropdown.Menu onClick={() => handleChannel(channel)}>
-                    <Dropdown.Item onClick={() => handleDelete(channel)}>
+                  <Dropdown.Menu onClick={() => setActiveChannel(channel)}>
+                    <Dropdown.Item onClick={() => handleDelete()}>
                       {t("chat.remove")}
                     </Dropdown.Item>
-                    <Dropdown.Item onClick={() => handleRename(channel)}>
+                    <Dropdown.Item onClick={() => handleRename()}>
                       {t("chat.rename")}
                     </Dropdown.Item>
                   </Dropdown.Menu>
