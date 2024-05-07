@@ -57,7 +57,7 @@ const translation = {
       "errorRename": "Ошибка соединения",
       "successCreate": "Канал создан",
       "errorCreate": "Ошибка соединения",
-      "successRemove": "Канал удален",
+      "successRemove": "Канал удалён",
       "errorRemove": "Ошибка соединения",
     }
   }
