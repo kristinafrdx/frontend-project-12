@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Modal, Form } from "react-bootstrap";
+import { Modal, Form, Button } from "react-bootstrap";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
@@ -78,8 +78,9 @@ const RenameChannel = ({ setShowModal, channel }) => {
   return (
     <>
       <Modal show onHide={(e) => close(e)} centered>
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title>{t("chat.renameChannel")}</Modal.Title>
+          <button data-bs-dismiss="modal" aria-label="Close" className="btn btn-close" type="button" /> 
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={formik.handleSubmit}>
