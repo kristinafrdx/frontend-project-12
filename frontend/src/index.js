@@ -1,30 +1,29 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
-import store from "./store/index.js";
-// import reportWebVitals from './reportWebVitals';
-import { Provider } from "react-redux";
-import "./i18n.js";
-import { I18nextProvider } from "react-i18next";
-import i18next from "i18next";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
 import {
   Provider as RollbarProvider,
   ErrorBoundary as ErrorBoundaryProvider,
-} from "@rollbar/react";
+} from '@rollbar/react';
+import { Provider } from 'react-redux';
+import './i18n.js';
+import { I18nextProvider } from 'react-i18next';
+import i18next from 'i18next';
+import store from './store/index.js';
+import App from './App';
 
 const rollbarConfig = {
   accessToken: process.env.REACT_APP_MY_TOKEN,
   payload: {
-    environment: "production",
+    environment: 'production',
   },
   captureUncaught: true,
   captureUnhandledRejections: true,
 };
 
-console.log(process.env.REACT_APP_MY_TOKEN)
+console.log(process.env.REACT_APP_MY_TOKEN);
 
-const root = ReactDOM.createRoot(document.getElementById("chat"));
+const root = ReactDOM.createRoot(document.getElementById('chat'));
 root.render(
   <RollbarProvider config={rollbarConfig}>
     <ErrorBoundaryProvider>
@@ -34,7 +33,7 @@ root.render(
         </Provider>
       </I18nextProvider>
     </ErrorBoundaryProvider>
-  </RollbarProvider>
+  </RollbarProvider>,
 );
 
 // If you want to start measuring performance in your app, pass a function

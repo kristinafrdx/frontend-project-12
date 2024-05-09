@@ -1,19 +1,18 @@
-import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
-import { useTranslation } from "react-i18next";
-import { useRollbar } from "@rollbar/react";
-import { Formik } from "formik";
+import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
+import { useTranslation } from 'react-i18next';
+import { useRollbar } from '@rollbar/react';
 
 const InputField = ({ channelId }) => {
   const { t } = useTranslation();
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
   const [disabled, setDisabled] = useState(true);
-  const userName = localStorage.getItem("username");
-  const token = localStorage.getItem("token");
+  const userName = localStorage.getItem('username');
+  const token = localStorage.getItem('token');
   const rollbar = useRollbar();
 
   const inputRef = useRef(null);
-  
+
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
@@ -26,28 +25,28 @@ const InputField = ({ channelId }) => {
       setDisabled(false);
     } else {
       setDisabled(true);
-      setMessage("");
+      setMessage('');
     }
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newMessage = {
       body: message,
-      channelId: channelId,
+      channelId,
       username: userName,
     };
     await axios
-      .post("/api/v1/messages", newMessage, {
+      .post('/api/v1/messages', newMessage, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then(() => {
-        setMessage("");
+        setMessage('');
       })
-      .catch((e) => {
-        console.log(e);
-        rollbar.error("Send message", e);
+      .catch((error) => {
+        console.log(error);
+        rollbar.error('Send message', error);
       });
   };
 
@@ -62,7 +61,6 @@ const InputField = ({ channelId }) => {
             className="border-0 p-0 ps-2 form-control"
             value={message}
             onChange={(e) => handleMessage(e)}
-            autoFocus
             ref={inputRef}
           />
           <button
@@ -81,9 +79,9 @@ const InputField = ({ channelId }) => {
               <path
                 fillRule="evenodd"
                 d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm4.5 5.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"
-              ></path>
+              />
             </svg>
-            <span className="visually-hidden">{t("chat.send")}</span>
+            <span className="visually-hidden">{t('chat.send')}</span>
           </button>
         </div>
       </form>

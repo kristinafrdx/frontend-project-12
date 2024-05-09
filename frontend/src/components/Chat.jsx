@@ -1,22 +1,22 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import axios from "axios";
-import { setChannels } from "../slices/channelsSlice";
-import Header from "./Header.jsx";
-import Field from "./Field";
-import Channels from "./Channels";
-import { setMessages } from "../slices/messagesSlice";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import axios from 'axios';
+import { ToastContainer } from 'react-toastify';
+import { setChannels } from '../slices/channelsSlice';
+import Header from './Header.jsx';
+import Field from './Field';
+import Channels from './Channels';
+import { setMessages } from '../slices/messagesSlice';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Chat = () => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
 
   const dispatch = useDispatch();
 
-  const getChannels = async (token) => {
+  const getChannels = async () => {
     await axios
-      .get("/api/v1/channels", {
+      .get('/api/v1/channels', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -30,16 +30,15 @@ const Chat = () => {
       });
   };
 
-  const getMessages = async (token) => {
+  const getMessages = async () => {
     await axios
-      .get("/api/v1/messages", {
+      .get('/api/v1/messages', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {
         dispatch(setMessages(response.data));
-        // console.log(response.data); // =>[{ id: '1', body: 'text message', channelId: '1', username: 'admin }, ...]
       })
       .catch((e) => {
         console.log(e);
@@ -48,8 +47,8 @@ const Chat = () => {
 
   /* eslint-disable */
   useEffect(() => {
-    getChannels(token);
-    getMessages(token);
+    getChannels();
+    getMessages();
   }, [token]);
   /* eslint-enable */
 

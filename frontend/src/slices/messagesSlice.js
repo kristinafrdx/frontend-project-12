@@ -1,7 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const messagesSlice = createSlice({
-  name: "messages",
+  name: 'messages',
   initialState: {
     messages: [],
   },
@@ -16,7 +16,7 @@ const messagesSlice = createSlice({
       return {
         ...state,
         messages: state.messages.filter(
-          (el) => Number(el.channelId) !== Number(action.payload)
+          (el) => Number(el.channelId) !== Number(action.payload),
         ),
       };
     },
