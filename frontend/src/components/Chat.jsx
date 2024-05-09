@@ -23,7 +23,6 @@ const Chat = () => {
       })
       .then((response) => {
         dispatch(setChannels(response.data));
-        // console.log(response.data); // =>[{ id: '1', name: 'general', removable: false }, ...]
       })
       .catch((e) => {
         console.log(e);

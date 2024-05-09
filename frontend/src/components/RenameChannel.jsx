@@ -61,7 +61,6 @@ const RenameChannel = ({ setShowModal, channel }) => {
             setShowModal(false);
             const update = channels.map((el) => (el.id === response.data.id ? response.data : el));
             dispatch(setChannels(update));
-            // dispatch(setCurrentChannel(response.data));
             toast.success(t('toasts.successRename'));
           });
       } catch (e) {
