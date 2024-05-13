@@ -5,16 +5,16 @@ import {
   BrowserRouter as Router,
   Navigate,
 } from 'react-router-dom';
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import NotFoundPage from './components/NotFound';
 import Login from './components/Login';
 import Chat from './components/Chat';
 import Registration from './components/Registration';
 
 const App = () => {
-  // const token = useSelector((state) => state.user.token);
-  const token = localStorage.getItem('token');
-  console.log(token);
+  const token = useSelector((state) => state.user.token);
+  // const token = localStorage.getItem('token');
+  // console.log(token);
   return (
     <div className="d-flex flex-column h-100">
       <Router>
