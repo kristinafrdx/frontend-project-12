@@ -13,6 +13,8 @@ start-backend:
 deploy:
 	git push
 
+publish: 
+  make 
 start:
 	make start-backend & make start-frontend
 

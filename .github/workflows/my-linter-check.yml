@@ -34,4 +34,3 @@ jobs:
       - run: make lint
       # - run: make webpack
       # - run: make build
-      - run: make publish
