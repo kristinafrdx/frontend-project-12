@@ -7,8 +7,6 @@
 
 Hexlet Chat is a simple version of Slack
 
-![Chat-img](frontend/src/assets/readme/readmepic.png)
-
 ## How to use it?
 
 <code>[Click here to look the app](https://frontend-project-12-069w.onrender.com)</code> 
