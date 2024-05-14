@@ -23,14 +23,11 @@ Hexlet Chat is a simple version of Slack
 
 ### To install:
    ```
-   git clone https://github.com/kristinafrdx/frontend-project-12.git
-   ```
-
-  ```
+    git clone https://github.com/kristinafrdx/frontend-project-12.git
     make install
-  ```
-
-  <p>To start:</p>
    ```
-     make start
+
+### To start:
+   ```
+   make start
    ```
