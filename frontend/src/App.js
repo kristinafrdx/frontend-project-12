@@ -13,7 +13,7 @@ import Registration from './components/Registration';
 
 const App = () => {
   const token = useSelector((state) => state.user.token);
-  // const token = localStorage.getItem('token');
+  // const token = sessionStorage.getItem('token');
   // console.log(token);
   return (
     <div className="d-flex flex-column h-100">
