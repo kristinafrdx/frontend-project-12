@@ -38,6 +38,7 @@ const Login = () => {
         if (data.token) {
           localStorage.setItem('username', data.username);
           localStorage.setItem('token', data.token);
+          sessionStorage.setItem('token', data.token);
           addToken(data.token);
           addUserName(data.username);
           navigate('/');

@@ -16,6 +16,7 @@ const Header = () => {
     dispatch(resetUserName());
     localStorage.removeItem('token');
     localStorage.removeItem('username');
+    sessionStorage.removeItem('token');
     navigate('/login');
   };
 
