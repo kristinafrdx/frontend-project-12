@@ -66,6 +66,7 @@ const Registration = () => {
             if (response.data.token) {
               localStorage.setItem('username', response.data.username);
               localStorage.setItem('token', response.data.token);
+              sessionStorage.setItem('token', response.data.token);
               addToken(response.data.token);
               addUserName(response.data.username);
               navigate('/');
