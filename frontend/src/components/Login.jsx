@@ -18,7 +18,7 @@ const Login = () => {
   const rollbar = useRollbar();
   const addToken = (token) => dispatch(setToken(token));
   const addUserName = (name) => dispatch(setUserName(name));
-  const { saveToken } = useToken();
+  const { saveToken, saveUsername } = useToken();
 
   const inputRef = useRef(null);
 
@@ -39,6 +39,7 @@ const Login = () => {
         const { data } = await axios.post('/api/v1/login', values);
         if (data.token) {
           saveToken(data.token);
+          saveUsername(data.username);
           addToken(data.token);
           addUserName(data.username);
           navigate('/');

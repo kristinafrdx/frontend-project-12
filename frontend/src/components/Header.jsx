@@ -7,7 +7,7 @@ import { useToken } from './context/authContext';
 
 const Header = () => {
   const { t } = useTranslation();
-  const { token, saveToken } = useToken();
+  const { token, saveToken, saveUsername } = useToken();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -15,6 +15,7 @@ const Header = () => {
     dispatch(resetToken());
     dispatch(resetUserName());
     saveToken('');
+    saveUsername('');
     navigate('/login');
   };
 

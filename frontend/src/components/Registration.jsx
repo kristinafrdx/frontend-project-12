@@ -18,7 +18,7 @@ const Registration = () => {
   const rollbar = useRollbar();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { saveToken } = useToken();
+  const { saveToken, saveUsername } = useToken();
   const addToken = (token) => dispatch(setToken(token));
   const addUserName = (name) => dispatch(setUserName(name));
 
@@ -66,6 +66,7 @@ const Registration = () => {
           .then((response) => {
             if (response.data.token) {
               saveToken(response.data.token);
+              saveUsername(response.data.username);
               addToken(response.data.token);
               addUserName(response.data.username);
               navigate('/');
