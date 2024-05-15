@@ -8,6 +8,7 @@ import { useRollbar } from '@rollbar/react';
 import { Form } from 'react-bootstrap';
 import Header from './Header';
 import { setToken, setUserName } from '../slices/authSlice';
+import { useToken } from './context/authContext';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ const Login = () => {
   const rollbar = useRollbar();
   const addToken = (token) => dispatch(setToken(token));
   const addUserName = (name) => dispatch(setUserName(name));
+  const { saveToken } = useToken();
 
   const inputRef = useRef(null);
 
@@ -38,7 +40,7 @@ const Login = () => {
         if (data.token) {
           localStorage.setItem('username', data.username);
           localStorage.setItem('token', data.token);
-          sessionStorage.setItem('token', data.token);
+          saveToken(data.token);
           addToken(data.token);
           addUserName(data.username);
           navigate('/');

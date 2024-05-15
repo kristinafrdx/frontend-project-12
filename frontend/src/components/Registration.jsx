@@ -10,6 +10,7 @@ import { useRollbar } from '@rollbar/react';
 import { setToken, setUserName } from '../slices/authSlice';
 import Header from './Header';
 import imageRegistration from '../images/registration.jpg';
+import { useToken } from './context/authContext';
 
 const Registration = () => {
   const { t } = useTranslation();
@@ -17,7 +18,7 @@ const Registration = () => {
   const rollbar = useRollbar();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const { saveToken } = useToken();
   const addToken = (token) => dispatch(setToken(token));
   const addUserName = (name) => dispatch(setUserName(name));
 
@@ -66,7 +67,7 @@ const Registration = () => {
             if (response.data.token) {
               localStorage.setItem('username', response.data.username);
               localStorage.setItem('token', response.data.token);
-              sessionStorage.setItem('token', response.data.token);
+              saveToken(response.data.token);
               addToken(response.data.token);
               addUserName(response.data.username);
               navigate('/');

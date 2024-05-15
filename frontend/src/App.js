@@ -7,13 +7,16 @@ import {
 } from 'react-router-dom';
 // import { useSelector } from 'react-redux';
 import NotFoundPage from './components/NotFound';
+import { useToken } from './components/context/authContext';
 import Login from './components/Login';
 import Chat from './components/Chat';
 import Registration from './components/Registration';
 
 const App = () => {
   // const token = useSelector((state) => state.user.token);
-  const token = sessionStorage.getItem('token');
+  // const token = sessionStorage.getItem('token');
+  const { token } = useToken();
+
   console.log(token);
   return (
     <div className="d-flex flex-column h-100">

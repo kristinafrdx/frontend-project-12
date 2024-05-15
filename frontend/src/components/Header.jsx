@@ -1,13 +1,13 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { resetToken, resetUserName } from '../slices/authSlice';
+import { useToken } from './context/authContext';
 
 const Header = () => {
   const { t } = useTranslation();
-  const token = useSelector((state) => state.user.token);
-  const isAuthorized = !!token;
+  const { token, saveToken } = useToken();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -16,7 +16,7 @@ const Header = () => {
     dispatch(resetUserName());
     localStorage.removeItem('token');
     localStorage.removeItem('username');
-    sessionStorage.removeItem('token');
+    saveToken('');
     navigate('/login');
   };
 
@@ -26,7 +26,7 @@ const Header = () => {
         <a className="navbar-brand" href="/">
           {t('header.hexlet')}
         </a>
-        {isAuthorized && (
+        {token && (
           <button
             type="button"
             className="btn btn-primary"
