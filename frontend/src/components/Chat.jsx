@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { ToastContainer } from 'react-toastify';
@@ -28,6 +28,11 @@ const Chat = () => {
         console.log(e);
       });
   };
+  const scrollMessagesRef = useRef(null);
+
+  const handleScrollBottom = () => {
+    scrollMessagesRef.current?.lastElementChild?.scrollIntoView();
+  };
 
   const getMessages = async () => {
     await axios
@@ -38,6 +43,9 @@ const Chat = () => {
       })
       .then((response) => {
         dispatch(setMessages(response.data));
+        setTimeout(() => {
+          handleScrollBottom();
+        }, 0);
       })
       .catch((e) => {
         console.log(e);
@@ -54,12 +62,12 @@ const Chat = () => {
   return (
     <>
       <Header />
-      <div className="h-100" id="chat">
+      <div className="h-100 overflow-hidden" id="chat">
         <div className="d-flex flex-column h-100">
           <div className="container h-100 my-4 overflow-hidden rounded shadow">
             <div className="row h-100 bg-white flex-md-row">
               <Channels />
-              <Field />
+              <Field refCurrent={scrollMessagesRef} handleScroll={handleScrollBottom} />
             </div>
           </div>
         </div>

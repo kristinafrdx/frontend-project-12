@@ -9,7 +9,12 @@ import { useRollbar } from '@rollbar/react';
 import { setChannels } from '../slices/channelsSlice';
 import { removeMessages } from '../slices/messagesSlice';
 
-const DeleteChannel = ({ channel, setShowDeleteWindow, handleChannel }) => {
+const DeleteChannel = ({
+  channel,
+  setShowDeleteWindow,
+  handleChannel,
+  handleScroll,
+}) => {
   const { t } = useTranslation();
   const rollbar = useRollbar();
   const dispatch = useDispatch();
@@ -38,6 +43,9 @@ const DeleteChannel = ({ channel, setShowDeleteWindow, handleChannel }) => {
           dispatch(removeMessages(currentChannel.id));
           dispatch(setChannels(update));
           handleChannel(defaultChannel);
+          setTimeout(() => {
+            handleScroll();
+          }, 0);
           toast.success(t('toasts.successRemove'));
         });
     } catch (e) {

@@ -6,7 +6,7 @@ import InputField from './InputField';
 import Messages from './Messages';
 import { setMessages } from '../slices/messagesSlice';
 
-const Field = () => {
+const Field = ({ refCurrent, handleScroll }) => {
   const { t } = useTranslation();
   const currentChannel = useSelector(
     (state) => state.currentChannel.currentChannel,
@@ -14,6 +14,8 @@ const Field = () => {
   const messages = useSelector((state) => state.messages.messages);
   const [messagesLocal, setMessagesLocal] = useState(null);
   const dispatch = useDispatch();
+
+  // const scrollMessagesRef = useRef(null);
 
   const messageOfChannel = messages
     .flat()
@@ -31,6 +33,9 @@ const Field = () => {
   useEffect(() => {
     if (messagesLocal) {
       dispatch(setMessages(messagesLocal));
+      setTimeout(() => {
+        handleScroll();
+      }, 0);
     }
   }, [messagesLocal]);
   /* eslint-enable */
@@ -50,7 +55,7 @@ const Field = () => {
             {t('chat.key', { count: messageOfChannel.length })}
           </span>
         </div>
-        <div id="messages-box" className="chat-messages overflow-auto px-5">
+        <div id="messages-box" className="chat-messages overflow-auto px-5" ref={refCurrent}>
           {messageOfChannel.flat().length > 0
               && messages
                 .flat()

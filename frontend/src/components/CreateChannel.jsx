@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useRollbar } from '@rollbar/react';
 import { setCurrentChannel } from '../slices/currentChannelSlice';
 
-const CreateChannel = ({ setShowModal, setActiveChannel }) => {
+const CreateChannel = ({ setShowModal, setActiveChannel, handleScroll }) => {
   const { t } = useTranslation();
   const channels = useSelector((state) => state.channels.channels);
   const rollbar = useRollbar();
@@ -54,6 +54,9 @@ const CreateChannel = ({ setShowModal, setActiveChannel }) => {
             setActiveChannel(response.data);
             dispatch(setCurrentChannel(response.data));
             toast.success(t('toasts.successCreate'));
+            setTimeout(() => {
+              handleScroll();
+            }, 0);
           });
       } catch (e) {
         console.log(e);

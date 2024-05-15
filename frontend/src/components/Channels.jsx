@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Dropdown, ButtonGroup, Button } from 'react-bootstrap';
 import { io } from 'socket.io-client';
@@ -24,6 +24,19 @@ const Channels = () => {
 
   const dispatch = useDispatch();
   const channels = useSelector((state) => state.channels.channels);
+
+  const refScroll = useRef(null);
+
+  const handleScrollToTop = () => {
+    refScroll.current.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
+  const handleScrollToBottom = () => {
+    refScroll.current?.lastElementChild?.scrollIntoView();
+  };
 
   const handleChannel = (channel) => {
     setActiveChannel(channel);
@@ -86,6 +99,7 @@ const Channels = () => {
         <ul
           id="channels-box"
           className="nav flex-column nav-pills nav-fill px-2 mb-3 overflow-auto h-100 d-block"
+          ref={refScroll}
         >
           {channels.map((channel) => (!channel.removable ? (
             <li className="nav-item w-100" key={channel.id}>
@@ -140,9 +154,9 @@ const Channels = () => {
       </div>
       {showModal && (
         <CreateChannel
-          channel={activeChannel}
           setShowModal={setShowModal}
           setActiveChannel={setActiveChannel}
+          handleScroll={handleScrollToBottom}
           title="Добавить канал"
         />
       )}
@@ -151,6 +165,7 @@ const Channels = () => {
           channel={activeChannel}
           setShowDeleteWindow={setShowDeleteWindow}
           handleChannel={handleChannel}
+          handleScroll={handleScrollToTop}
         />
       )}
       {showRenameWindow && (
