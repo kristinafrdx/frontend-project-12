@@ -14,7 +14,7 @@ const Header = () => {
   const handleLogout = () => {
     dispatch(resetToken());
     dispatch(resetUserName());
-    saveToken(null);
+    saveToken('');
     navigate('/login');
   };
 

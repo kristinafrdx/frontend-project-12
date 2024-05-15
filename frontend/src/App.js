@@ -13,11 +13,9 @@ import Chat from './components/Chat';
 import Registration from './components/Registration';
 
 const App = () => {
-  // const token = useSelector((state) => state.user.token);
-  // const token = sessionStorage.getItem('token');
   const { token } = useToken();
 
-  console.log(token);
+  console.log(token ? 'yes' : 'no', token);
   return (
     <div className="d-flex flex-column h-100">
       <Router>

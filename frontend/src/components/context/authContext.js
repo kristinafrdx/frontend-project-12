@@ -11,7 +11,7 @@ const TokenContext = createContext();
 export const useToken = () => useContext(TokenContext);
 
 export const TokenProvider = ({ children }) => {
-  const [token, setToken] = useState(localStorage.getItem('token') || null);
+  const [token, setToken] = useState(localStorage.getItem('token') === null ? '' : localStorage.getItem('token'));
 
   const saveToken = (newToken) => {
     setToken(newToken);
