@@ -38,9 +38,7 @@ const Login = () => {
       try {
         const { data } = await axios.post('/api/v1/login', values);
         if (data.token) {
-          localStorage.setItem('username', data.username);
-          localStorage.setItem('token', data.token);
-          saveToken('token', data.token);
+          saveToken(data.token);
           addToken(data.token);
           addUserName(data.username);
           navigate('/');
@@ -123,6 +121,7 @@ const Login = () => {
               <div className="card-footer p-4">
                 <div className="text-center">
                   <span>{t('login.notAnAccount')}</span>
+                  {'\u00A0'}
                   <a href="/signup">{t('login.linkToRegistration')}</a>
                 </div>
               </div>

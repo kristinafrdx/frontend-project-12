@@ -4,7 +4,7 @@ const translation = {
       login: 'Войти',
       username: 'Ваш ник',
       password: 'Пароль',
-      notAnAccount: 'Нет аккаунта? ',
+      notAnAccount: 'Нет аккаунта?',
       linkToRegistration: 'Регистрация',
     },
     header: {

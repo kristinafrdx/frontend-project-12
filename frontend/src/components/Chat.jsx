@@ -8,10 +8,10 @@ import Field from './Field';
 import Channels from './Channels';
 import { setMessages } from '../slices/messagesSlice';
 import 'react-toastify/dist/ReactToastify.css';
+import { useToken } from './context/authContext.js';
 
 const Chat = () => {
-  const token = localStorage.getItem('token');
-
+  const { token } = useToken();
   const dispatch = useDispatch();
 
   const getChannels = async () => {

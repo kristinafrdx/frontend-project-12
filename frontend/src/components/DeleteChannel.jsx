@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useRollbar } from '@rollbar/react';
 import { setChannels } from '../slices/channelsSlice';
 import { removeMessages } from '../slices/messagesSlice';
+import { useToken } from './context/authContext';
 
 const DeleteChannel = ({
   channel,
@@ -18,7 +19,7 @@ const DeleteChannel = ({
   const { t } = useTranslation();
   const rollbar = useRollbar();
   const dispatch = useDispatch();
-  const token = localStorage.getItem('token');
+  const { token } = useToken();
   const channels = useSelector((state) => state.channels.channels);
   const currentChannel = useSelector(
     (state) => state.currentChannel.currentChannel,

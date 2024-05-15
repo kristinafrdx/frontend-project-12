@@ -9,14 +9,14 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRollbar } from '@rollbar/react';
 import { setCurrentChannel } from '../slices/currentChannelSlice';
+import { useToken } from './context/authContext';
 
 const CreateChannel = ({ setShowModal, setActiveChannel, handleScroll }) => {
   const { t } = useTranslation();
   const channels = useSelector((state) => state.channels.channels);
   const rollbar = useRollbar();
-
   const dispatch = useDispatch();
-  const token = localStorage.getItem('token');
+  const { token } = useToken();
 
   const channelsNames = () => channels.map((el) => el.name);
   const names = channelsNames();

@@ -10,12 +10,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useRollbar } from '@rollbar/react';
 import leo from 'leo-profanity';
 import { setChannels } from '../slices/channelsSlice';
+import { useToken } from './context/authContext';
 
 const RenameChannel = ({ setShowModal, channel }) => {
   const { t } = useTranslation();
   const channels = useSelector((state) => state.channels.channels);
   const dispatch = useDispatch();
-  const token = localStorage.getItem('token');
+  const { token } = useToken();
   const rollbar = useRollbar();
   const inputRef = useRef(null);
 

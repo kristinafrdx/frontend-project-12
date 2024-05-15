@@ -14,9 +14,7 @@ const Header = () => {
   const handleLogout = () => {
     dispatch(resetToken());
     dispatch(resetUserName());
-    localStorage.removeItem('token');
-    localStorage.removeItem('username');
-    saveToken('');
+    saveToken(null);
     navigate('/login');
   };
 

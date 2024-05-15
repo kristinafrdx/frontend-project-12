@@ -15,8 +15,6 @@ const Field = ({ refCurrent, handleScroll }) => {
   const [messagesLocal, setMessagesLocal] = useState(null);
   const dispatch = useDispatch();
 
-  // const scrollMessagesRef = useRef(null);
-
   const messageOfChannel = messages
     .flat()
     .filter((el) => el.channelId === currentChannel.id);
