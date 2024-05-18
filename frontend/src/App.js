@@ -5,7 +5,6 @@ import {
   BrowserRouter as Router,
   Navigate,
 } from 'react-router-dom';
-// import { useSelector } from 'react-redux';
 import NotFoundPage from './components/NotFound';
 import { useToken } from './components/context/authContext';
 import Login from './components/Login';
@@ -15,7 +14,6 @@ import Registration from './components/Registration';
 const App = () => {
   const { token } = useToken();
 
-  console.log(token ? 'yes' : 'no', token);
   return (
     <div className="d-flex flex-column h-100">
       <Router>

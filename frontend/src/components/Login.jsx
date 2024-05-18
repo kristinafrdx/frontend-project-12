@@ -50,7 +50,6 @@ const Login = () => {
         console.error('Ошибка при отправке запроса:', error);
         setError(true);
         rollbar.error('Login page', error);
-        console.log(error);
       }
     },
   });

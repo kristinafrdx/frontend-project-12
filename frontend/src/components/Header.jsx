@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { resetToken, resetUserName } from '../slices/authSlice';
 import { useToken } from './context/authContext';
@@ -9,14 +8,12 @@ const Header = () => {
   const { t } = useTranslation();
   const { token, saveToken, saveUsername } = useToken();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleLogout = () => {
     dispatch(resetToken());
     dispatch(resetUserName());
     saveToken('');
     saveUsername('');
-    navigate('/login');
   };
 
   return (

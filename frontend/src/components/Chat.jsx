@@ -7,7 +7,6 @@ import Header from './Header.jsx';
 import Field from './Field';
 import Channels from './Channels';
 import { setMessages } from '../slices/messagesSlice';
-import 'react-toastify/dist/ReactToastify.css';
 import { useToken } from './context/authContext.js';
 
 const Chat = () => {
@@ -25,7 +24,7 @@ const Chat = () => {
         dispatch(setChannels(response.data));
       })
       .catch((e) => {
-        console.log(e);
+        console.error(e);
       });
   };
   const scrollMessagesRef = useRef(null);
@@ -48,7 +47,7 @@ const Chat = () => {
         }, 0);
       })
       .catch((e) => {
-        console.log(e);
+        console.error(e);
       });
   };
 

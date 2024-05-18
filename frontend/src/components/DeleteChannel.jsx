@@ -4,7 +4,6 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { useRollbar } from '@rollbar/react';
 import { setChannels } from '../slices/channelsSlice';
 import { removeMessages } from '../slices/messagesSlice';
@@ -43,14 +42,16 @@ const DeleteChannel = ({
           const update = channels.filter((el) => el.id !== response.data.id);
           dispatch(removeMessages(currentChannel.id));
           dispatch(setChannels(update));
-          handleChannel(defaultChannel);
           setTimeout(() => {
             handleScroll();
           }, 0);
           toast.success(t('toasts.successRemove'));
+          // if (currentChannel.id === response.data.id) {
+          handleChannel(defaultChannel);
+          // }
         });
     } catch (e) {
-      console.log(e);
+      console.error(e);
       toast.error(t('toasts.errorRemove'));
       rollbar.error('Delete channel', e);
     }

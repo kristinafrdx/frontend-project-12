@@ -6,9 +6,8 @@ import {
   ErrorBoundary as ErrorBoundaryProvider,
 } from '@rollbar/react';
 import { Provider } from 'react-redux';
-import './i18n.js';
 import { I18nextProvider } from 'react-i18next';
-import i18next from 'i18next';
+import i18n from './i18n.js';
 import { TokenProvider } from './components/context/authContext';
 import store from './store/index.js';
 import App from './App';
@@ -27,7 +26,7 @@ root.render(
   <TokenProvider>
     <RollbarProvider config={rollbarConfig}>
       <ErrorBoundaryProvider>
-        <I18nextProvider i18n={i18next}>
+        <I18nextProvider i18n={i18n}>
           <Provider store={store}>
             <App />
           </Provider>

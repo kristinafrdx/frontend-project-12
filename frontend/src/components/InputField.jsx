@@ -10,7 +10,6 @@ const InputField = ({ channelId }) => {
   const [disabled, setDisabled] = useState(true);
   const { userName, token } = useToken();
 
-  console.log(userName);
   const rollbar = useRollbar();
 
   const inputRef = useRef(null);
@@ -47,7 +46,7 @@ const InputField = ({ channelId }) => {
         setMessage('');
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
         rollbar.error('Send message', error);
       });
   };

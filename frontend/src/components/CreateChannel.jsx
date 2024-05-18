@@ -6,7 +6,6 @@ import { useFormik } from 'formik';
 import { Modal, Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { useRollbar } from '@rollbar/react';
 import { setCurrentChannel } from '../slices/currentChannelSlice';
 import { useToken } from './context/authContext';
@@ -59,7 +58,7 @@ const CreateChannel = ({ setShowModal, setActiveChannel, handleScroll }) => {
             }, 0);
           });
       } catch (e) {
-        console.log(e);
+        console.error(e);
         toast.error(t('toasts.errorCreate'));
         rollbar.error('Create channel', e);
       }

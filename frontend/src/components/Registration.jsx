@@ -73,7 +73,7 @@ const Registration = () => {
             }
           });
       } catch (error) {
-        console.log(t('errors.networkErr'));
+        console.error(t('errors.networkErr'));
         setErr(true);
         rollbar.error('Registration failed', error);
       }
