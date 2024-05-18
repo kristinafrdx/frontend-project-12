@@ -137,7 +137,7 @@ const Channels = () => {
                     `}
                   variant={`${Number(initChannel.id) === Number(channel.id) && 'secondary'}`}
                 >
-                  <span className="visually-hidden">Управление каналом</span>
+                  <span className="visually-hidden">{t('chat.manage')}</span>
                 </Dropdown.Toggle>
                 <Dropdown.Menu onClick={() => setActiveChannel(channel)}>
                   <Dropdown.Item onClick={() => handleDelete()}>
@@ -157,7 +157,7 @@ const Channels = () => {
           setShowModal={setShowModal}
           setActiveChannel={setActiveChannel}
           handleScroll={handleScrollToBottom}
-          title="Добавить канал"
+          title={t('chat.addChannel')}
         />
       )}
       {showDeleteWindow && (

@@ -25,6 +25,7 @@ const DeleteChannel = ({
   );
 
   const defaultChannel = { id: '1', name: 'general', removable: false };
+
   const closeWindow = () => {
     setShowDeleteWindow(false);
   };

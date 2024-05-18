@@ -84,7 +84,7 @@ const Login = () => {
                       autoComplete="username"
                       required
                       id="username"
-                      placeholder="Ваш ник"
+                      placeholder={t('login.username')}
                       ref={inputRef}
                       autoFocus
                     />
@@ -99,7 +99,7 @@ const Login = () => {
                       onChange={formik.handleChange}
                       value={formik.values.password}
                       autoComplete="current-password"
-                      placeholder="Пароль"
+                      placeholder={t('login.password')}
                       required
                     />
                     <Form.Label htmlFor="password">{t('login.password')}</Form.Label>

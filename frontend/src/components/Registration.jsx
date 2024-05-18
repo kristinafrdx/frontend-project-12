@@ -92,7 +92,7 @@ const Registration = () => {
                   <img
                     src={imageRegistration}
                     className="rounded-circle"
-                    alt="Регистрация"
+                    alt={t('registration.signUp')}
                   />
                 </div>
                 <Form onSubmit={formik.handleSubmit} className="w-50">
@@ -102,7 +102,7 @@ const Registration = () => {
 
                   <Form.Group className="form-floating mb-3">
                     <Form.Control
-                      placeholder="От 3 до 20 символов"
+                      placeholder={t('errors.minMax')}
                       name="username"
                       ref={inputRef}
                       autoComplete="username"
@@ -130,7 +130,7 @@ const Registration = () => {
 
                   <Form.Group className="form-floating mb-3">
                     <Form.Control
-                      placeholder="Не менее 6 символов"
+                      placeholder={t('errors.minSymbols')}
                       name="password"
                       autoComplete="new-password"
                       type="password"
@@ -157,7 +157,7 @@ const Registration = () => {
 
                   <Form.Group className="form-floating mb-4">
                     <Form.Control
-                      placeholder="Пароли должны совпадать"
+                      placeholder={t('errors.matchPassword')}
                       name="confirmPassword"
                       type="password"
                       id="confirmPassword"
@@ -183,7 +183,7 @@ const Registration = () => {
                       style={{ width: 'unset' }}
                     >
                       {formik.errors.confirmPassword
-                        || 'Такой пользователь уже существует'}
+                        || t('errors.exist')}
                     </Form.Control.Feedback>
                   </Form.Group>
                   <button

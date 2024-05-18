@@ -16,7 +16,7 @@ const NotFoundPage = () => {
           <a href="/">{t('notfound.linkToPage')}</a>
         </p>
         <img
-          alt="Страница не найдена"
+          alt={t('notfound.notfoundPage')}
           className="img-fluid"
           src={imageNotfount}
         />
