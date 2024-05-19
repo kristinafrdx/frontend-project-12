@@ -67,7 +67,9 @@ const RenameChannel = ({ setShowModal, channel }) => {
         setShowModal(false);
         console.error(e);
         toast.error(t('toasts.errorRename'));
-        rollbar.error('Rename channel', e);
+        if (e.response.status > 399 && e.response.status < 499) {
+          rollbar.error('Rename channel', e);
+        }
       }
     },
   });

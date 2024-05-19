@@ -47,7 +47,9 @@ const InputField = ({ channelId }) => {
       })
       .catch((error) => {
         console.error(error);
-        rollbar.error('Send message', error);
+        if (error.response.status > 399 && error.response.status < 499) {
+          rollbar.error('Send message', error);
+        }
       });
   };
 

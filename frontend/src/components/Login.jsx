@@ -49,7 +49,9 @@ const Login = () => {
       } catch (error) {
         console.error('Ошибка при отправке запроса:', error);
         setError(true);
-        rollbar.error('Login page', error);
+        if (error.response.status > 399 && error.response.status < 499) {
+          rollbar.error('Login page', error);
+        }
       }
     },
   });

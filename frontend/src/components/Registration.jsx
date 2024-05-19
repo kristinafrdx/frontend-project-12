@@ -75,7 +75,9 @@ const Registration = () => {
       } catch (error) {
         console.error(t('errors.networkErr'));
         setErr(true);
-        rollbar.error('Registration failed', error);
+        if (error.response.status > 399 && error.response.status < 499) {
+          rollbar.error('Registration failed', error);
+        }
       }
     },
   });

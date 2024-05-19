@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { ToastContainer } from 'react-toastify';
+import { useRollbar } from '@rollbar/react';
 import { setChannels } from '../slices/channelsSlice';
 import Header from './Header.jsx';
 import Field from './Field';
@@ -12,6 +13,7 @@ import { useToken } from './context/authContext.js';
 const Chat = () => {
   const { token } = useToken();
   const dispatch = useDispatch();
+  const rollbar = useRollbar();
 
   const getChannels = async () => {
     await axios
@@ -48,6 +50,9 @@ const Chat = () => {
       })
       .catch((e) => {
         console.error(e);
+        if (e.response.status > 399 && e.response.status < 499) {
+          rollbar.error('Show message', e);
+        }
       });
   };
 

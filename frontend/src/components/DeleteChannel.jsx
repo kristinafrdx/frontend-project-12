@@ -47,14 +47,16 @@ const DeleteChannel = ({
             handleScroll();
           }, 0);
           toast.success(t('toasts.successRemove'));
-          // if (currentChannel.id === response.data.id) {
-          handleChannel(defaultChannel);
-          // }
+          if (currentChannel.id === response.data.id) {
+            handleChannel(defaultChannel);
+          }
         });
     } catch (e) {
       console.error(e);
       toast.error(t('toasts.errorRemove'));
-      rollbar.error('Delete channel', e);
+      if (e.response.status > 399 && e.response.status < 499) {
+        rollbar.error('Delete channel', e);
+      }
     }
   };
 

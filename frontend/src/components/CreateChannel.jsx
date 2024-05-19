@@ -60,7 +60,9 @@ const CreateChannel = ({ setShowModal, setActiveChannel, handleScroll }) => {
       } catch (e) {
         console.error(e);
         toast.error(t('toasts.errorCreate'));
-        rollbar.error('Create channel', e);
+        if (e.response.status > 399 && e.response.status < 499) {
+          rollbar.error('Create channel', e);
+        }
       }
     },
   });
